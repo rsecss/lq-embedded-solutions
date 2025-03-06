@@ -30,9 +30,7 @@
 以下是如何下载和使用这些参考代码的步骤：
 
 - 访问 GitHub 仓库：[lq-embedded-solutions](https://github.com/rsecss/lq-embedded-solutions)
-
 - 通过 git clone 克隆仓库，或直接下载 ZIP 文件
-
 - 打开参考代码下的 MDK -ARM 文件下的工程文件进行编译调试即可
 
 ## Contributions
