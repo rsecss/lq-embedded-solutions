@@ -1,0 +1,36 @@
+# 强制文本文件使用 LF 换行符
+* text=auto eol=lf
+
+# 源代码
+*.c text eol=lf
+*.h text eol=lf
+*.s text eol=lf
+
+# 配置与文档
+*.md text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+
+# Keil 工程文件
+*.uvprojx text eol=lf
+*.uvoptx text eol=lf
+
+# Shell / Batch
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# 二进制文件（不做换行符转换）
+*.zip binary
+*.pdf binary
+*.png binary
+*.jpg binary
+*.pack binary
+*.axf binary
+*.hex binary
+*.bin binary
+*.o binary
+*.lib binary
+*.exe binary
