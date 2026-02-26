@@ -1,0 +1,66 @@
+{
+    
+    "C File Template": {
+        "prefix": "cfile",
+        "body": [
+            "#include <stdio.h>",
+            "#include <stdlib.h>",
+            "typedef unsigned long long ull_t;",
+            "typedef signed long long ll_t;",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "description": "Template for C source file"
+    },
+    "C Header Template": {
+        "prefix": "cheader",
+        "body": [
+            "#ifndef ${1:XX}_H",
+            "#define ${1:XX}_H",
+            "",
+            "",
+            "#ifdef __cplusplus",
+            "extern \"C\" {",
+            "#endif",
+            "",
+            "",
+            "#ifdef __cplusplus",
+            "}",
+            "#endif",
+            "",
+            "#endif /* ${1:XX}_H */",
+            "",
+            "",
+            ""
+        ],
+        "description": "Header guard for C/C++ header files"
+    },
+    "Cpp Header Template": {
+        "prefix": "cppheader",
+        "body": [
+            "#ifndef ${1:XX}_H",
+            "#define ${1:XX}_H",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "#endif /* ${1:XX}_H */",
+            "",
+            "",
+            ""
+        ],
+        "description": "Header guard for C/C++ header files"
+    },
+    "comments": {
+        "prefix": "comment",
+        "body": [
+            "/**",
+            " *",
+            " */",
+        ],
+        "description": "TODO comment"
+    }
+}

@@ -1,0 +1,31 @@
+BasedOnStyle: LLVM
+ 
+# 强制花括号遵循 Allman 风格
+BreakBeforeBraces: Allman
+ 
+# 对齐连续的宏定义
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
+ 
+# 控制行宽，避免行太长
+ColumnLimit: 80
+ 
+# 控制空格和标点符号风格
+SpaceBeforeParens: ControlStatements  # 控制语句的括号前有空格
+SpaceBeforeAssignmentOperators: true  # 赋值操作符前插入空格
+ 
+# 缩进设置
+IndentWidth: 4  # 使用4个空格缩进
+ 
+# 控制每行最大空行数（避免空行过多）
+MaxEmptyLinesToKeep: 1
+ 
+# 启用注释对齐，注释前保留一个空格
+AlignTrailingComments: true  
+SpacesBeforeTrailingComments: 1  
+ 
+# 对齐转义的换行符到左侧
+AlignEscapedNewlinesLeft: true
+ 
+# 允许将参数换行，但保持多个参数在同一行（打包参数）
+AllowAllParametersOfDeclarationOnNextLine: true
+BinPackParameters: true  # 启用参数打包，减少换行次数

@@ -1,0 +1,15 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "led_app.h": "c",
+        "usart_app.h": "c",
+        "bsp_system.h": "c",
+        "main.h": "c",
+        "lcd.h": "c",
+        "usart.h": "c",
+        "stm32g4xx_hal.h": "c",
+        "scheduler.h": "c",
+        "rtc.h": "c",
+        "rtc_app.h": "c"
+    }
+}
