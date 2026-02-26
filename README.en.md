@@ -6,7 +6,7 @@
     <a href="README.md"> 简体中文 </a> | English
   </p>
   <p>
-    <a href="LICENSE"> <img src="https://img.shields.io/github/license/rsecss/lq-embedded-solutions?color=blue" alt="MIT License"> </a>&nbsp;
+    <a href="LICENSE"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/network/members"> <img src="https://img.shields.io/github/forks/rsecss/lq-embedded-solutions?style=flat&color=blue" alt="Forks"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/issues"> <img src="https://img.shields.io/github/issues/rsecss/lq-embedded-solutions" alt="Issues"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/pulls"> <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"> </a>&nbsp;
@@ -92,4 +92,4 @@ PRs and Issues are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 
-> This project is open-sourced under the [MIT License](LICENSE). The code is provided for learning and reference purposes only, designed for specific Lanqiao Cup contest problems. The author **provides no warranty**. Please evaluate the applicability and verify contest requirements before use.
+> This project is licensed under [CC BY-NC-SA 4.0](LICENSE). The code is provided for learning and reference purposes only, and commercial use is prohibited. Designed for specific Lanqiao Cup contest problems, the author **provides no warranty**. Please evaluate the applicability and verify contest requirements before use.

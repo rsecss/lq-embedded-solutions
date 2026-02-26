@@ -6,7 +6,7 @@
     简体中文 | <a href="README.en.md"> English </a>
   </p>
   <p>
-    <a href="LICENSE"> <img src="https://img.shields.io/github/license/rsecss/lq-embedded-solutions?color=blue" alt="MIT License"> </a>&nbsp;
+    <a href="LICENSE"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/network/members"> <img src="https://img.shields.io/github/forks/rsecss/lq-embedded-solutions?style=flat&color=blue" alt="Forks"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/issues"> <img src="https://img.shields.io/github/issues/rsecss/lq-embedded-solutions" alt="Issues"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/pulls"> <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"> </a>&nbsp;
@@ -92,4 +92,4 @@ git clone https://github.com/rsecss/lq-embedded-solutions.git
 
 ---
 
-> 本项目采用 [MIT 许可证](LICENSE) 开源。代码仅供学习与参考，针对特定蓝桥杯赛题设计， 作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
+> 本项目采用 [CC BY-NC-SA 4.0](LICENSE) 许可协议开源。代码仅供学习与参考，禁止商业用途。针对特定蓝桥杯赛题设计，作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
