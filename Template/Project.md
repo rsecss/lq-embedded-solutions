@@ -1,6 +1,8 @@
 # 工程文档
 
-> 说明：考试中没有 vscode 开发环境，还是要尽快适应 keil 的开发
+> [!TIP]
+>
+> 考试中没有 vscode 开发环境，还是要尽快适应 keil 的开发
 
 ## 简介
 
@@ -16,6 +18,26 @@
 8. RTC 模块
 9. PWM 模块
 10. 输入捕获模块
+
+## 说明（重要）
+
+> [!IMPORTANT]
+>
+> 使用模板前请务必阅读以下配置要点，可避免绝大多数环境搭建问题。
+
+1. CubeMX 版本选择 6.12.0 及以上，版本过低可能会导致无法打开 CubeMX 工程文件。
+2. CubeMX 中这里 SYS 不需要配置是因为开发平台自带调试器，可以不用选择 Debug，而在其他平台则一般选择采用 `Serial Wire Debug`，否则可能无法调试和烧录。
+3. CubeMX 中的 NVIC 中配置系统滴答定时器要配置成最高优先级（0），防止频繁被其他任务抢占导致计时精度下降或者系统响应延迟。
+4. CubeMX 中的晶振填写 `24MHz`，时钟树选择配置为 `HSI`，同时配置为 `80MHz`。
+5. CubeMX 中的 IDE 选择 `MDK-ARM` ，同时工程配置包的选择不能使用最新的，因为官方只给了 1.40 和 1.60 的固件配置包
+6. CubeMX 中的 Code Generator（生成选项卡）中勾选 `Add necessary library files as reference in the project` 和 `Generate peripheral initialization as a pair of'.c/.h'files per peripheral`
+7. 进入 keil 中 首先取消勾选 `Manage Run-Time Environment` 中的 CMSIS，原因是后面添加文件可能会导致编译失败。
+8. 注意查看 Keil 的版本，如果版本过低，可能会无法打开工程。
+9. keil 中需要安装主控芯片的固件包 `Keil.STM32G4xx_DFP.2.0.0.pack`，否则会导致编译失败。
+10. 如果串口方面出现程序下载卡死或者无法下载，应该首先查看魔术棒下的 target 下的 **`MicroLIB`** 是否勾选，勾选后重新编译。如果这里勾选了然后再检查其他的配置是否正确。
+11. 需要进入 C/C++ 设置界面下面的 Optimization 选择 `Level 0`，同时在 includepath 栏加入头文件路径 `.\MyApplication`, 否则无法识别头文件。
+12. 在 Debug 设置界面，仿真器选择 **`CMSIS-DAP Debugger`**，同时在旁边的设置中选择 Trace 更改时钟频率为 `80MHz`、选择 Port 为 `SW` 和选择 Flash Download 勾选上 `Reset and Run` 按钮，方便后续的下载和操作。
+13. `keilkill.bat` 是批处理文件，主要是为了方便分享工程时，可以清除编译产生的中间文件，这个可以视情况和选择
 
 ## 框架结构图
 
@@ -69,13 +91,9 @@ graph BT
 
 ## 模板最终效果展示
 
-1. 版本一：v1.0
+1. 版本一：v1.0 ![模板效果显示图 v1.0](./Project.assets/4.jpg)
 
-![模板效果显示图 v1.0](./Project.assets/4.jpg)
-
-2. 版本二：v2.0
-
-   ![模板效果显示图 v2.0](./Project.assets/19.jpg)
+2. 版本二：v2.0 ![模板效果显示图 v2.0](./Project.assets/19.jpg)
 
 ## 模块配置说明
 
@@ -86,23 +104,7 @@ graph BT
 2. ADC 多通道采集（同一个 ADC 控制器采集两个通道，注意数据传到 buffer 里面是交替的，做滤波的是否记得要分开）
     ![ADC 多通道采集配置](./Project.assets/16.png)
 
-## 说明（重要）
-
-1. CubeMX 版本选择 6.12.0 及以上，版本过低可能会导致无法打开 CubeMX 工程文件。
-2. CubeMX 中这里 SYS 不需要配置是因为开发平台自带调试器，可以不用选择 Debug，而在其他平台则一般选择采用 `Serial Wire Debug`，否则可能无法调试和烧录。
-3. CubeMX 中的 NVIC 中配置系统滴答定时器要配置成最高优先级（0），防止频繁被其他任务抢占导致计时精度下降或者系统响应延迟。
-4. CubeMX 中的晶振选择 `24MHz`，时钟树选择配置为 `HSI`，同时配置为 `80MHz`。
-5. CubeMX 中的 IDE 选择 `MDK-ARM` ，同时工程配置包的选择不能使用最新的，因为官方只给了 1.40 和 1.60 的固件配置包
-6. CubeMX 中的 Code Generator（生成选项卡）中勾选 `Add necessary library files as reference in the project` 和 `Generate peripheral initialization as a pair of'.c/.h'files per peripheral`
-7. 进入 keil 中 首先取消勾选 `Manage Run-Time Environment` 中的 CMSIS，原因是后面添加文件可能会导致编译失败。
-8. 注意查看 Keil 的版本，如果版本过低，可能会无法打开工程。
-9. keil 中需要安装主控芯片的固件包 `Keil.STM32G4xx_DFP.2.0.0.pack`，否则会导致编译失败。
-10. 如果串口方面出现程序下载卡死或者无法下载，应该首先查看魔术棒下的 target 下的 **`MicroLIB`** 是否勾选，如果没有勾选，请勾选，然后重新编译。）是否勾选，如果这里勾选了然后再检查其他的配置是否正确。
-11. 需要进入 C/C++ 设置界面下面的 Optimization 选择 `Level 0`，同时在 includepath 栏加入头文件路径 `.\MyApplication`, 否则无法识别头文件。
-12. 在 Debug 设置界面，仿真器选择 **`CMSIS-DAP Debugger`**，同时在旁边的设置中选择 Trace 更改时钟频率为 `80MHz`、选择 Port 为 `SW` 和选择 Flash Download 勾选上 `Reset and Run` 按钮，方便后续的下载和操作。
-13. `keilkill.bat` 是批处理文件，主要是为了方便分享工程时，可以清除编译产生的中间文件，这个可以视情况和选择
-
-## 注意事项
+## 故障排查指南（注意事项）
 
 > 以下是一些常见的问题和解决方法
 
@@ -151,9 +153,9 @@ graph BT
   2. 晶振未配置合理
   3. MircoLIB 未勾选  
 **卡死：**
-  4. 调度器中的结构体的类型为 `uint32_t`？
+  4. 调度器中的结构体的类型不是 `uint32_t`
       ![结构体定义](./Project.assets/10.png)
-  5. `lcd_sprintf` 函数中的重装载内容过长？
+  5. `lcd_sprintf` 函数中的重装载内容过长
 
 - **解决方法：**
   1. 检查 PD2 引脚是否使能
@@ -165,7 +167,7 @@ graph BT
 #### 4. 如何解决使用串口无法打印输出的问题？
 
 - **问题的原因：**
-  1. 可能是使用 CubeMX 配置引脚的时候没有正确配置，比如说我就是将串口的引脚配置成 PC4 和 PC5，原理图上是 PA9 和 PA10 两个引脚（因为但是看的时候同样可以打开串口，所有就没有排错的时候就没有注意这个问题，最后将 UART 配置文件完全比对后才发现这个问题，费了我老半天查错，有点不值当）
+  1. 可能是使用 CubeMX 配置引脚的时候没有正确配置，比如说例如将串口引脚误配置为 PC4/PC5 而非正确的 PA9/PA10（因为当时看的时候同样可以打开串口，所有就没有排错的时候就没有注意这个问题，最后将 UART 配置文件完全比对后才发现这个问题，费了很长时间排错，有点不值当）
      ![引脚配置](./Project.assets/2.png)
   2. 串口能够打印，但是数据是乱码的
   3. 可能是没有中断使能函数初始化
@@ -173,7 +175,7 @@ graph BT
 - **解决方法：**
   1. 查看引脚时候配置正确
      ![引脚配置解决方法](./Project.assets/3.png)
-  2. 可能是对 `HAL_UART_Transmit` 这个 API 函数使用错误，比如说我就遇到了，应该传地址 **`(uint8_t *)&ch`**，结果写成 `(uint8_t *)ch` 导致串口能够打印，但是是乱码的（==这里真是细节问题==）
+  2. 可能是对 `HAL_UART_Transmit` 这个 API 函数使用错误，比如说我就遇到了，应该传地址 **`(uint8_t *)&ch`**，结果写成 `(uint8_t *)ch` 导致串口能够打印，但是是乱码的（**这里真是细节问题**）
   3. 检查中断使能函数并放置在初始化，同时还有有一句放在外面使能了接收，后续接收才能自己循环开启接收
   4. 检查是否打开了 DMA 的空闲接受并且 DMA 半满中断是否使能
   5. 检查重定向的函数是否为 `int fputc` 以及是否开启  `MircoLIB`
@@ -225,7 +227,7 @@ graph BT
   1. 检查日期与时间是否一起获取
      ![RTC 定义](./Project.assets/14.png)
 
-#### EEPROM 写入失败？
+#### 9. EEPROM 写入失败？
 
 - **问题的原因：**
   1. 未加入延时
