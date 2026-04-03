@@ -3,10 +3,10 @@
   <p> <strong> 蓝桥杯嵌入式设计与开发 — 历届真题参考代码 & 工程模板 </strong> </p>
   <p> 基于 CT117E-M4 竞赛平台 · STM32G431RBT6 · HAL 库 · STM32CubeMX + MDK </p>
   <p>
-    简体中文 | <a href="README.en.md"> English </a>
+    简体中文 | <a href="README_EN.md"> English </a>
   </p>
   <p>
-    <a href="LICENSE"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/network/members"> <img src="https://img.shields.io/github/forks/rsecss/lq-embedded-solutions?style=flat&color=blue" alt="Forks"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/issues"> <img src="https://img.shields.io/github/issues/rsecss/lq-embedded-solutions" alt="Issues"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/pulls"> <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"> </a>&nbsp;
@@ -33,6 +33,7 @@
 | 第十三届（2022） | ✅ | — | — |
 | 第十四届（2023） | ✅ | ✅ | — |
 | 第十五届（2024） | ✅ | ✅ | ✅ |
+| 第十六届（2025） | ✅ | — | — |
 
 ## 目录结构
 
@@ -46,10 +47,12 @@ lq-embedded-solutions/
 │   ├── 03-第十四届/
 │   │   ├── 省赛/
 │   │   └── 国赛/
-│   └── 04-第十五届/
-│       ├── 省赛/
-│       ├── 国赛/
-│       └── 模拟题/
+│   ├── 04-第十五届/
+│   │   ├── 省赛/
+│   │   ├── 国赛/
+│   │   └── 模拟题/
+│   └── 05-第十六届/
+│       └── 省赛/
 ├── Reference/                     # 参考资料
 │   ├── individual/                # 竞赛规则、原理图、芯片手册等
 │   └── lanqiao-cup-*.zip          # 蓝桥杯电子类历届真题汇编
@@ -92,4 +95,4 @@ git clone https://github.com/rsecss/lq-embedded-solutions.git
 
 ---
 
-> 本项目采用 [CC BY-NC-SA 4.0](LICENSE) 许可协议开源。代码仅供学习与参考，禁止商业用途。针对特定蓝桥杯赛题设计，作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
+> 本项目采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议开源。代码仅供学习与参考，禁止商业用途。针对特定蓝桥杯赛题设计，作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
