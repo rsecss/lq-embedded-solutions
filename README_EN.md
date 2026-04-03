@@ -6,7 +6,7 @@
     <a href="README.md"> 简体中文 </a> | English
   </p>
   <p>
-    <a href="LICENSE"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/network/members"> <img src="https://img.shields.io/github/forks/rsecss/lq-embedded-solutions?style=flat&color=blue" alt="Forks"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/issues"> <img src="https://img.shields.io/github/issues/rsecss/lq-embedded-solutions" alt="Issues"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/pulls"> <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"> </a>&nbsp;
@@ -33,6 +33,7 @@
 | 13th (2022) | ✅ | — | — |
 | 14th (2023) | ✅ | ✅ | — |
 | 15th (2024) | ✅ | ✅ | ✅ |
+| 16th (2025) | ✅ | — | — |
 
 ## Directory Structure
 
@@ -46,10 +47,12 @@ lq-embedded-solutions/
 │   ├── 03-第十四届/
 │   │   ├── 省赛/
 │   │   └── 国赛/
-│   └── 04-第十五届/
-│       ├── 省赛/
-│       ├── 国赛/
-│       └── 模拟题/
+│   ├── 04-第十五届/
+│   │   ├── 省赛/
+│   │   ├── 国赛/
+│   │   └── 模拟题/
+│   └── 05-第十六届/
+│       └── 省赛/
 ├── Reference/                     # Reference materials
 │   ├── individual/                # Competition rules, schematics, datasheets, etc.
 │   └── lanqiao-cup-*.zip          # Lanqiao Cup past problem compilations
@@ -92,4 +95,4 @@ PRs and Issues are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 
-> This project is licensed under [CC BY-NC-SA 4.0](LICENSE). The code is provided for learning and reference purposes only, and commercial use is prohibited. Designed for specific Lanqiao Cup contest problems, the author **provides no warranty**. Please evaluate the applicability and verify contest requirements before use.
+> This project is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). The code is provided for learning and reference purposes only, and commercial use is prohibited. Designed for specific Lanqiao Cup contest problems, the author **provides no warranty**. Please evaluate the applicability and verify contest requirements before use.
