@@ -56,7 +56,7 @@ void pwm_set_frequency(int frequency, uint8_t tim_x)
     
     switch (tim_x)
     {
-        case 1:
+        case 16:
             /* 保存原占空比 */
             duty = (float)TIM16->CCR1 / (TIM16->ARR + 1);
             
@@ -70,7 +70,7 @@ void pwm_set_frequency(int frequency, uint8_t tim_x)
             /* 更新寄存器 */
             TIM16->EGR = TIM_EGR_UG;
             break;
-        case 2:
+        case 17:
             /* 保存原占空比 */
             duty = (float)TIM17->CCR1 / (TIM17->ARR + 1);
             
