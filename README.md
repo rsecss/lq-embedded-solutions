@@ -31,7 +31,7 @@
 | 第十三届（2022） | ✅ | — | — |
 | 第十四届（2023） | ✅ | — | — |
 | 第十五届（2024） | ✅ | ✅ | ✅ |
-| 第十六届（2025） | ✅ | — | — |
+| 第十六届（2025） | ✅ | — | ✅ |
 | 第十七届（2026） | ✅ | — | — |
 
 ## 目录结构
@@ -47,7 +47,8 @@ lq-embedded-solutions/
 │   │   ├── 国赛/
 │   │   └── 模拟题/
 │   ├── 05-第十六届/
-│   │   └── 省赛/
+│   │   ├── 省赛/
+│   │   └── 模拟题/
 │   └── 06-第十七届/
 │       └── 省赛/
 ├── Reference/                     # 参考资料
@@ -84,12 +85,12 @@ git clone https://github.com/rsecss/lq-embedded-solutions.git
 
 > [!IMPORTANT]
 >
-> 首次使用模板前，请务必阅读 [`Template/Project.md` — 说明（重要）](Template/Project.md#说明重要) 中的环境配置要点（CubeMX 版本、时钟、MicroLIB、固件包等），可避免绝大多数搭建问题。遇到外设异常时也可查阅其中的 [故障排查指南](Template/Project.md#故障排查指南注意事项)。
+> 首次使用模板前，请务必阅读 [`Project.md` — 说明（非常重要）](Template/Project.md#说明重要) 中的环境配置要点（CubeMX 版本、时钟、MicroLIB、固件包等），可避免绝大多数搭建问题。遇到外设异常时也可查阅其中的 [故障排查指南](Template/Project.md#故障排查指南注意事项)。
 
 ## 参与贡献
 
 欢迎提交 PR 和 Issue。详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ---
-
+## 许可证
 > 本项目采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议开源。代码仅供学习与参考，禁止商业用途。针对特定蓝桥杯赛题设计，作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
