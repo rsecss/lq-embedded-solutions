@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -179,6 +178,8 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle(UART_HandleTypeDef *huart, uint8_t *p
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
 
+HAL_UART_RxEventTypeTypeDef HAL_UARTEx_GetRxEventType(const UART_HandleTypeDef *huart);
+
 
 /**
   * @}
@@ -198,7 +199,7 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
   * @param  __CLOCKSOURCE__ output variable.
   * @retval UART clocking source, written in __CLOCKSOURCE__.
   */
-#if defined(UART5)
+#if defined(UART5) && defined(USART3)
 #define UART_GETCLOCKSOURCE(__HANDLE__,__CLOCKSOURCE__)       \
   do {                                                        \
     if((__HANDLE__)->Instance == USART1)                      \
@@ -332,7 +333,120 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
       (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;         \
     }                                                         \
   } while(0U)
-#elif defined(UART4)
+#elif defined(UART5) && !defined(USART3)
+#define UART_GETCLOCKSOURCE(__HANDLE__,__CLOCKSOURCE__)       \
+  do {                                                        \
+    if((__HANDLE__)->Instance == USART1)                      \
+    {                                                         \
+      switch(__HAL_RCC_GET_USART1_SOURCE())                   \
+      {                                                       \
+        case RCC_USART1CLKSOURCE_PCLK2:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK2;         \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_HSI:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_SYSCLK:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_LSE:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == USART2)                 \
+    {                                                         \
+      switch(__HAL_RCC_GET_USART2_SOURCE())                   \
+      {                                                       \
+        case RCC_USART2CLKSOURCE_PCLK1:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_HSI:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_SYSCLK:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_LSE:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == UART4)                  \
+    {                                                         \
+      switch(__HAL_RCC_GET_UART4_SOURCE())                    \
+      {                                                       \
+        case RCC_UART4CLKSOURCE_PCLK1:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_UART4CLKSOURCE_HSI:                          \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_UART4CLKSOURCE_SYSCLK:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_UART4CLKSOURCE_LSE:                          \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == UART5)                  \
+    {                                                         \
+      switch(__HAL_RCC_GET_UART5_SOURCE())                    \
+      {                                                       \
+        case RCC_UART5CLKSOURCE_PCLK1:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_UART5CLKSOURCE_HSI:                          \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_UART5CLKSOURCE_SYSCLK:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_UART5CLKSOURCE_LSE:                          \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == LPUART1)                \
+    {                                                         \
+      switch(__HAL_RCC_GET_LPUART1_SOURCE())                  \
+      {                                                       \
+        case RCC_LPUART1CLKSOURCE_PCLK1:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_HSI:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_SYSCLK:                     \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_LSE:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else                                                      \
+    {                                                         \
+      (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;         \
+    }                                                         \
+  } while(0U)
+#elif defined(UART4) && defined(USART3)
 #define UART_GETCLOCKSOURCE(__HANDLE__,__CLOCKSOURCE__)       \
   do {                                                        \
     if((__HANDLE__)->Instance == USART1)                      \
@@ -445,7 +559,99 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
       (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;         \
     }                                                         \
   } while(0U)
-#else
+#elif defined(UART4) && !defined(USART3)
+#define UART_GETCLOCKSOURCE(__HANDLE__,__CLOCKSOURCE__)       \
+  do {                                                        \
+    if((__HANDLE__)->Instance == USART1)                      \
+    {                                                         \
+      switch(__HAL_RCC_GET_USART1_SOURCE())                   \
+      {                                                       \
+        case RCC_USART1CLKSOURCE_PCLK2:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK2;         \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_HSI:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_SYSCLK:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_LSE:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == USART2)                 \
+    {                                                         \
+      switch(__HAL_RCC_GET_USART2_SOURCE())                   \
+      {                                                       \
+        case RCC_USART2CLKSOURCE_PCLK1:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_HSI:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_SYSCLK:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_LSE:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == UART4)                  \
+    {                                                         \
+      switch(__HAL_RCC_GET_UART4_SOURCE())                    \
+      {                                                       \
+        case RCC_UART4CLKSOURCE_PCLK1:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_UART4CLKSOURCE_HSI:                          \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_UART4CLKSOURCE_SYSCLK:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_UART4CLKSOURCE_LSE:                          \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == LPUART1)                \
+    {                                                         \
+      switch(__HAL_RCC_GET_LPUART1_SOURCE())                  \
+      {                                                       \
+        case RCC_LPUART1CLKSOURCE_PCLK1:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_HSI:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_SYSCLK:                     \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_LSE:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else                                                      \
+    {                                                         \
+      (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;         \
+    }                                                         \
+  } while(0U)
+#elif defined(USART3)
 #define UART_GETCLOCKSOURCE(__HANDLE__,__CLOCKSOURCE__)       \
   do {                                                        \
     if((__HANDLE__)->Instance == USART1)                      \
@@ -537,7 +743,78 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
       (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;         \
     }                                                         \
   } while(0U)
-#endif /* UART5 */
+#else
+#define UART_GETCLOCKSOURCE(__HANDLE__,__CLOCKSOURCE__)       \
+  do {                                                        \
+    if((__HANDLE__)->Instance == USART1)                      \
+    {                                                         \
+      switch(__HAL_RCC_GET_USART1_SOURCE())                   \
+      {                                                       \
+        case RCC_USART1CLKSOURCE_PCLK2:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK2;         \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_HSI:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_SYSCLK:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_USART1CLKSOURCE_LSE:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == USART2)                 \
+    {                                                         \
+      switch(__HAL_RCC_GET_USART2_SOURCE())                   \
+      {                                                       \
+        case RCC_USART2CLKSOURCE_PCLK1:                       \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_HSI:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_SYSCLK:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_USART2CLKSOURCE_LSE:                         \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else if((__HANDLE__)->Instance == LPUART1)                \
+    {                                                         \
+      switch(__HAL_RCC_GET_LPUART1_SOURCE())                  \
+      {                                                       \
+        case RCC_LPUART1CLKSOURCE_PCLK1:                      \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_PCLK1;         \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_HSI:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_HSI;           \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_SYSCLK:                     \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_SYSCLK;        \
+          break;                                              \
+        case RCC_LPUART1CLKSOURCE_LSE:                        \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_LSE;           \
+          break;                                              \
+        default:                                              \
+          (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;     \
+          break;                                              \
+      }                                                       \
+    }                                                         \
+    else                                                      \
+    {                                                         \
+      (__CLOCKSOURCE__) = UART_CLOCKSOURCE_UNDEFINED;         \
+    }                                                         \
+  } while(0U)
+#endif /* UART5 && !USART3 */
 
 /** @brief  Report the UART mask to apply to retrieve the received data
   *         according to the word length and to the parity bits activation.
@@ -650,4 +927,3 @@ HAL_StatusTypeDef HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_
 
 #endif /* STM32G4xx_HAL_UART_EX_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

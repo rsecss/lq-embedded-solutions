@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -784,6 +783,7 @@ __STATIC_INLINE uint32_t LL_PWR_IsEnabledPUPDCfg(void)
   return ((temp == (PWR_CR3_APC))?1U:0U);
 }
 
+#if defined(SRAM2_BASE)
 /**
   * @brief  Enable SRAM2 content retention in Standby mode
   * @rmtoll CR3          RRS           LL_PWR_EnableSRAM2Retention
@@ -817,6 +817,7 @@ __STATIC_INLINE uint32_t LL_PWR_IsEnabledSRAM2Retention(void)
   return ((temp == (PWR_CR3_RRS))?1U:0U);
 }
 
+#endif /* SRAM2_BASE */
 /**
   * @brief  Enable the WakeUp PINx functionality
   * @rmtoll CR3          EWUP1         LL_PWR_EnableWakeUpPin\n
@@ -1601,4 +1602,3 @@ ErrorStatus LL_PWR_DeInit(void);
 
 #endif /* STM32G4xx_LL_PWR_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

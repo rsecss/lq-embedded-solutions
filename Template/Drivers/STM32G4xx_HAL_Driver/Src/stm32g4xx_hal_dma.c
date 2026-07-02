@@ -8,6 +8,18 @@
   *           + Initialization and de-initialization functions
   *           + IO operation functions
   *           + Peripheral State and errors functions
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
   @verbatim
   ==============================================================================
                         ##### How to use this driver #####
@@ -72,18 +84,6 @@
       (@) You can refer to the DMA HAL driver header file for more useful macros
 
   @endverbatim
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -492,7 +492,13 @@ HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef *hdma)
 {
   HAL_StatusTypeDef status = HAL_OK;
 
-  if(hdma->State != HAL_DMA_STATE_BUSY)
+  /* Check the DMA peripheral handle parameter */
+  if (hdma == NULL)
+  {
+    return HAL_ERROR;
+  }
+
+  if (hdma->State != HAL_DMA_STATE_BUSY)
   {
     /* no transfer ongoing */
     hdma->ErrorCode = HAL_DMA_ERROR_NO_XFER;
@@ -501,31 +507,31 @@ HAL_StatusTypeDef HAL_DMA_Abort(DMA_HandleTypeDef *hdma)
   }
   else
   {
-     /* Disable DMA IT */
-     __HAL_DMA_DISABLE_IT(hdma, (DMA_IT_TC | DMA_IT_HT | DMA_IT_TE));
-     
-     /* disable the DMAMUX sync overrun IT*/
-     hdma->DMAmuxChannel->CCR &= ~DMAMUX_CxCR_SOIE;
-     
-     /* Disable the channel */
-     __HAL_DMA_DISABLE(hdma);
-     
-     /* Clear all flags */
-     hdma->DmaBaseAddress->IFCR = (DMA_ISR_GIF1 << (hdma->ChannelIndex & 0x1FU));
-     
-     /* Clear the DMAMUX synchro overrun flag */
-     hdma->DMAmuxChannelStatus->CFR = hdma->DMAmuxChannelStatusMask;
-     
-     if (hdma->DMAmuxRequestGen != 0U)
-     {
-       /* if using DMAMUX request generator, disable the DMAMUX request generator overrun IT*/
-       /* disable the request gen overrun IT*/
-       hdma->DMAmuxRequestGen->RGCR &= ~DMAMUX_RGxCR_OIE;
-     
-       /* Clear the DMAMUX request generator overrun flag */
-       hdma->DMAmuxRequestGenStatus->RGCFR = hdma->DMAmuxRequestGenStatusMask;
-     }
-  }  
+    /* Disable the channel */
+    __HAL_DMA_DISABLE(hdma);
+
+    /* Disable DMA IT */
+    __HAL_DMA_DISABLE_IT(hdma, (DMA_IT_TC | DMA_IT_HT | DMA_IT_TE));
+
+    /* disable the DMAMUX sync overrun IT*/
+    hdma->DMAmuxChannel->CCR &= ~DMAMUX_CxCR_SOIE;
+
+    /* Clear all flags */
+    hdma->DmaBaseAddress->IFCR = (DMA_ISR_GIF1 << (hdma->ChannelIndex & 0x1FU));
+
+    /* Clear the DMAMUX synchro overrun flag */
+    hdma->DMAmuxChannelStatus->CFR = hdma->DMAmuxChannelStatusMask;
+
+    if (hdma->DMAmuxRequestGen != 0U)
+    {
+      /* if using DMAMUX request generator, disable the DMAMUX request generator overrun IT*/
+      /* disable the request gen overrun IT*/
+      hdma->DMAmuxRequestGen->RGCR &= ~DMAMUX_RGxCR_OIE;
+
+      /* Clear the DMAMUX request generator overrun flag */
+      hdma->DMAmuxRequestGenStatus->RGCFR = hdma->DMAmuxRequestGenStatusMask;
+    }
+  }
   /* Change the DMA state */
   hdma->State = HAL_DMA_STATE_READY;
 
@@ -560,11 +566,12 @@ HAL_StatusTypeDef HAL_DMA_Abort_IT(DMA_HandleTypeDef *hdma)
   }
   else
   {
-    /* Disable DMA IT */
-    __HAL_DMA_DISABLE_IT(hdma, (DMA_IT_TC | DMA_IT_HT | DMA_IT_TE));
 
     /* Disable the channel */
     __HAL_DMA_DISABLE(hdma);
+
+    /* Disable DMA IT */
+    __HAL_DMA_DISABLE_IT(hdma, (DMA_IT_TC | DMA_IT_HT | DMA_IT_TE));
 
     /* disable the DMAMUX sync overrun IT*/
     hdma->DMAmuxChannel->CCR &= ~DMAMUX_CxCR_SOIE;
@@ -938,7 +945,6 @@ HAL_StatusTypeDef HAL_DMA_UnRegisterCallback(DMA_HandleTypeDef *hdma, HAL_DMA_Ca
   */
 
 
-
 /** @defgroup DMA_Exported_Functions_Group3 Peripheral State and Errors functions
   *  @brief    Peripheral State and Errors functions
   *
@@ -1053,20 +1059,24 @@ static void DMA_CalcDMAMUXChannelBaseAndMask(DMA_HandleTypeDef *hdma)
   {
     /* DMA1 */
     DMAMUX1_ChannelBase = DMAMUX1_Channel0;
+    channel_number = (((uint32_t)hdma->Instance & 0xFFU) - 8U) / 20U;
   }
   else
   {
     /* DMA2 */
-#if defined (STM32G471xx) || defined (STM32G473xx) || defined (STM32G474xx) || defined (STM32G483xx) || defined (STM32G484xx) || defined (STM32G491xx) || defined (STM32G4A1xx)
+#if defined (STM32G471xx) || defined (STM32G473xx) || defined (STM32G474xx) || defined (STM32G414xx) || defined (STM32G483xx) || defined (STM32G484xx) || defined (STM32G491xx) || defined (STM32G4A1xx) || defined (STM32G411xC)
     DMAMUX1_ChannelBase = DMAMUX1_Channel8;
-#elif defined (STM32G431xx) || defined (STM32G441xx) || defined (STM32GBK1CB)
+    channel_number = ((((uint32_t)hdma->Instance & 0xFFU) - 8U) / 20U) + 8U;
+#elif defined (STM32G411xB) || defined (STM32G431xx) || defined (STM32G441xx) || defined (STM32GBK1CB)
     DMAMUX1_ChannelBase = DMAMUX1_Channel6;
+    channel_number = ((((uint32_t)hdma->Instance & 0xFFU) - 8U) / 20U) + 6U;
 #else
     DMAMUX1_ChannelBase = DMAMUX1_Channel7;
+    channel_number = ((((uint32_t)hdma->Instance & 0xFFU) - 8U) / 20U) + 7U;
 #endif /* STM32G4x1xx) */
   }
+
   dmamux_base_addr = (uint32_t)DMAMUX1_ChannelBase;
-  channel_number = (((uint32_t)hdma->Instance & 0xFFU) - 8U) / 20U;
   hdma->DMAmuxChannel = (DMAMUX_Channel_TypeDef *)(uint32_t)(dmamux_base_addr + ((hdma->ChannelIndex >> 2U) * ((uint32_t)DMAMUX1_Channel1 - (uint32_t)DMAMUX1_Channel0)));
   hdma->DMAmuxChannelStatus = DMAMUX1_ChannelStatus;
   hdma->DMAmuxChannelStatusMask = 1UL << (channel_number & 0x1FU);
@@ -1108,4 +1118,3 @@ static void DMA_CalcDMAMUXRequestGenBaseAndMask(DMA_HandleTypeDef *hdma)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

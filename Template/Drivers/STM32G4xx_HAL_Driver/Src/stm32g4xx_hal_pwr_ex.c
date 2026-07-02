@@ -11,13 +11,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2019 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -40,13 +39,13 @@
 /* Private define ------------------------------------------------------------*/
 
 
-#if defined (STM32G471xx) || defined (STM32G473xx) || defined (STM32G474xx) || defined (STM32G483xx) || defined (STM32G484xx)
+#if defined (STM32G471xx) || defined (STM32G473xx) || defined (STM32G414xx) || defined (STM32G474xx) || defined (STM32G483xx) || defined (STM32G484xx)
 #define PWR_PORTF_AVAILABLE_PINS   0x0000FFFFU /* PF0..PF15 */
 #define PWR_PORTG_AVAILABLE_PINS   0x000007FFU /* PG0..PG10 */
-#elif defined (STM32G431xx) || defined (STM32G441xx) || defined (STM32GBK1CB) || defined (STM32G491xx) || defined (STM32G4A1xx)
+#elif defined (STM32G411xB) || defined (STM32G411xC) || defined (STM32G431xx) || defined (STM32G441xx) || defined (STM32GBK1CB) || defined (STM32G491xx) || defined (STM32G4A1xx)
 #define PWR_PORTF_AVAILABLE_PINS   0x00000607U /* PF0..PF2 and PF9 and PF10 */
 #define PWR_PORTG_AVAILABLE_PINS   0x00000400U /* PG10 */
-#endif
+#endif /* STM32G471xx || STM32G473xx || STM32G414xx || STM32G474xx || STM32G483xx || STM32G484xx */
 
 /** @defgroup PWR_Extended_Private_Defines PWR Extended Private Defines
   * @{
@@ -551,7 +550,7 @@ void HAL_PWREx_DisablePullUpPullDownConfig(void)
 }
 
 
-
+#if defined (SRAM2_BASE)
 /**
   * @brief Enable SRAM2 content retention in Standby mode.
   * @note  When RRS bit is set, SRAM2 is powered by the low-power regulator in
@@ -574,7 +573,7 @@ void HAL_PWREx_DisableSRAM2ContentRetention(void)
 {
   CLEAR_BIT(PWR->CR3, PWR_CR3_RRS);
 }
-
+#endif /* SRAM2_BASE */
 
 
 
@@ -672,7 +671,7 @@ void HAL_PWREx_DisablePVM4(void)
   *         detection level and to each monitored supply.
   * @retval HAL status
   */
-HAL_StatusTypeDef HAL_PWREx_ConfigPVM(PWR_PVMTypeDef *sConfigPVM)
+HAL_StatusTypeDef HAL_PWREx_ConfigPVM(PWR_PVMTypeDef const *sConfigPVM)
 {
   HAL_StatusTypeDef status = HAL_OK;
 
@@ -1181,4 +1180,3 @@ void HAL_PWREx_DisableUCPDDeadBattery(void)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
