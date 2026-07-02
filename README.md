@@ -3,9 +3,6 @@
   <p> <strong> 蓝桥杯嵌入式设计与开发 — 历届真题参考代码 & 工程模板 </strong> </p>
   <p> 基于 CT117E-M4 竞赛平台 · STM32G431RBT6 · HAL 库 · STM32CubeMX + MDK </p>
   <p>
-    简体中文 | <a href="README_EN.md"> English </a>
-  </p>
-  <p>
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> <img src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue" alt="CC BY-NC-SA 4.0"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/network/members"> <img src="https://img.shields.io/github/forks/rsecss/lq-embedded-solutions?style=flat&color=blue" alt="Forks"> </a>&nbsp;
     <a href="https://github.com/rsecss/lq-embedded-solutions/issues"> <img src="https://img.shields.io/github/issues/rsecss/lq-embedded-solutions" alt="Issues"> </a>&nbsp;
@@ -18,40 +15,40 @@
 
 ---
 
-## 特性
+## 特点
 
 - **静态任务调度器** — 轻量级多任务框架，无需 RTOS 即可实现周期性任务管理
 - **聚合头文件管理** — 通过 `bsp_system.h` 统一管理各模块依赖，一行 `#include` 即可引入全部 BSP 驱动
 - **开箱即用的工程模板** — 预配置 CubeMX + MDK 工程，涵盖 LCD / LED / KEY / ADC / UART / I2C / RTC / PWM / 输入捕获等常用外设
-- **历届真题收录** — 第十二届至第十五届省赛 & 国赛真题，含赛题 PDF + 参考代码
+- **历届真题收录** — 第十二届至第十七届省赛真题 & 第十五届国赛真题，含赛题 PDF + 参考代码
 
 ## 赛题覆盖
+> 由于从第十五届开始全部使用了新的开发板，此前国赛题目中的部分功能需要拓展板实现，遂不再收录第十二至十四届国赛赛题。第十六、十七届省赛参考代码整理中，当前仅提供赛题 PDF。
 
 | 届数 | 省赛 | 国赛 | 模拟题 |
 |:---:|:---:|:---:|:---:|
 | 第十二届（2021） | ✅ | — | — |
 | 第十三届（2022） | ✅ | — | — |
-| 第十四届（2023） | ✅ | ✅ | — |
+| 第十四届（2023） | ✅ | — | — |
 | 第十五届（2024） | ✅ | ✅ | ✅ |
 | 第十六届（2025） | ✅ | — | — |
+| 第十七届（2026） | ✅ | — | — |
 
 ## 目录结构
 
 ```
 lq-embedded-solutions/
 ├── Past-contest-solutions/        # 历届赛题 & 参考代码
-│   ├── 01-第十二届/
-│   │   └── 省赛/
+│   ├── 01-第十二届/               # 第十二至十四届仅含省赛，赛题直接位于届目录下
 │   ├── 02-第十三届/
-│   │   └── 省赛/
 │   ├── 03-第十四届/
-│   │   ├── 省赛/
-│   │   └── 国赛/
-│   ├── 04-第十五届/
+│   ├── 04-第十五届/               # 自第十五届起按省赛 / 国赛 / 模拟题分类
 │   │   ├── 省赛/
 │   │   ├── 国赛/
 │   │   └── 模拟题/
-│   └── 05-第十六届/
+│   ├── 05-第十六届/
+│   │   └── 省赛/
+│   └── 06-第十七届/
 │       └── 省赛/
 ├── Reference/                     # 参考资料
 │   ├── individual/                # 竞赛规则、原理图、芯片手册等
