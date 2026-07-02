@@ -38,7 +38,11 @@ void limit_filter(uint32_t *data, int32_t size, uint32_t min_value, uint32_t max
  */
 static int32_t compare(const void *e1, const void *e2)
 {
-    return (*(uint32_t *)e1 - *(uint32_t *)e2);
+    uint32_t a = *(const uint32_t *)e1;
+    uint32_t b = *(const uint32_t *)e2;
+
+    /* 不能写 a - b：无符号相减在 a < b 时回绕成大正数，差值超过 INT32_MAX 时排序错误 */
+    return (a > b) - (a < b);
 }
 
 /**
