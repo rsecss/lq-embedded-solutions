@@ -112,7 +112,13 @@ static uint32_t calculate_ic_value(uint32_t *buffer, uint8_t buffer_size)
         tim_ic_temp += buffer[i];     // 累加缓冲区中的捕获值
     }
     tim_ic_temp /= buffer_size;              // 计算平均值
-    
+
+    /* 上电后信号到来前缓冲区全 0：float 除零得 inf，转整型是未定义行为 */
+    if (tim_ic_temp == 0)
+    {
+        return 0;
+    }
+
     return (int32_t)(UNIT_TIME / (float)tim_ic_temp);
 }
 
