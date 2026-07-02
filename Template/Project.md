@@ -89,6 +89,10 @@ graph BT
 
 ![keil 配置](./Project.assets/9.png)
 
+> [!IMPORTANT]
+>
+> 本仓库源码统一为 UTF-8 编码，而 Keil 默认按 ANSI（中文系统为 GBK）读写文件，直接打开中文注释会显示乱码，编辑保存后还会破坏文件编码。请先在 Edit → Configuration → Editor 中将 Encoding 设置为 **Encode in UTF-8 without signature**，再编辑源码。
+
 ## 模板最终效果展示
 
 1. 版本一：v1.0 ![模板效果显示图 v1.0](./Project.assets/4.jpg)
