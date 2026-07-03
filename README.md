@@ -38,11 +38,11 @@
 
 ```
 lq-embedded-solutions/
-├── Past-contest-solutions/        # 历届赛题 & 参考代码
-│   ├── 01-第十二届/               # 第十二至十四届仅含省赛，赛题直接位于届目录下
+├── Past-contest-solutions/			# 历届赛题 & 参考代码
+│   ├── 01-第十二届/                 # 第十二至十四届仅含省赛，赛题直接位于届目录下
 │   ├── 02-第十三届/
 │   ├── 03-第十四届/
-│   ├── 04-第十五届/               # 自第十五届起按省赛 / 国赛 / 模拟题分类
+│   ├── 04-第十五届/                 # 自第十五届起按省赛 / 国赛 / 模拟题分类
 │   │   ├── 省赛/
 │   │   ├── 国赛/
 │   │   └── 模拟题/
@@ -51,16 +51,16 @@ lq-embedded-solutions/
 │   │   └── 模拟题/
 │   └── 06-第十七届/
 │       └── 省赛/
-├── Reference/                     # 参考资料
-│   ├── individual/                # 竞赛规则、原理图、芯片手册等
-│   └── lanqiao-cup-*.zip          # 蓝桥杯电子类历届真题汇编
-├── Template/                      # 项目工程模板
-│   ├── Core/                      # CubeMX 生成的核心层
-│   ├── Drivers/                   # HAL & CMSIS 驱动
-│   ├── MyApplication/             # 应用层（BSP 驱动 + 调度器）
-│   ├── MDK-ARM/                   # Keil 工程文件
-│   └── Project.md                 # 工程模板文档
-└── Tools/                         # 工具软件（ARMCC、固件包、USB 驱动）
+├── Reference/                      # 参考资料
+│   ├── individual/                 # 竞赛规则、原理图、芯片手册等
+│   └── lanqiao-cup-*.zip           # 蓝桥杯电子类历届真题汇编
+├── Template/                       # 项目工程模板
+│   ├── Core/                       # CubeMX 生成的核心层
+│   ├── Drivers/                    # HAL & CMSIS 驱动
+│   ├── MyApplication/              # 应用层（BSP 驱动 + 调度器）
+│   ├── MDK-ARM/                    # Keil 工程文件
+│   └── Project.md                  # 工程模板文档
+└── Tools/                          # 工具软件（固件包、USB 驱动）
 ```
 
 ## 快速开始
@@ -85,12 +85,12 @@ git clone https://github.com/rsecss/lq-embedded-solutions.git
 
 > [!IMPORTANT]
 >
-> 首次使用模板前，请务必阅读 [`Project.md` — 说明（非常重要）](Template/Project.md#说明重要) 中的环境配置要点（CubeMX 版本、时钟、MicroLIB、固件包等），可避免绝大多数搭建问题。遇到外设异常时也可查阅其中的 [故障排查指南](Template/Project.md#故障排查指南注意事项)。
+> 首次使用模板前，请务必阅读 [说明（非常重要）](Template/Project.md#说明重要) 中的环境配置要点（CubeMX 版本、时钟、MicroLIB、固件包等），可避免绝大多数搭建问题。遇到外设异常时也可查阅其中的 [故障排查指南](Template/Project.md#故障排查指南注意事项)。
 
 ## 参与贡献
 
-欢迎提交 PR 和 Issue。详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
----
 ## 许可证
-> 本项目采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议开源。代码仅供学习与参考，禁止商业用途。针对特定蓝桥杯赛题设计，作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
+
+本项目采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议开源。代码仅供学习与参考，禁止商业用途。针对特定蓝桥杯赛题设计，作者 **不提供任何保证**，使用前请自行评估内容的适用性以及核对题目要求。
