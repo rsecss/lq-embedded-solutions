@@ -28,7 +28,7 @@
 1. CubeMX 版本选择 6.12.0 及以上，版本过低可能会导致无法打开 CubeMX 工程文件。
 2. CubeMX 中这里 SYS 不需要配置是因为开发平台自带调试器，可以不用选择 Debug，而在其他平台则一般选择采用 `Serial Wire Debug`，否则可能无法调试和烧录。
 3. CubeMX 中的 NVIC 中配置系统滴答定时器要配置成最高优先级（0），防止频繁被其他任务抢占导致计时精度下降或者系统响应延迟。
-4. CubeMX 中的晶振填写 `24MHz`，时钟树选择配置为 `HSI`，同时配置为 `80MHz`。
+4. CubeMX 中的晶振填写 `24MHz`，时钟树选择配置为 `HSE`，同时配置为 `80MHz`。
 5. CubeMX 中的 IDE 选择 `MDK-ARM` ，同时工程配置包的选择不能使用最新的，因为官方只给了 1.40 和 1.60 的固件配置包
 6. CubeMX 中的 Code Generator（生成选项卡）中勾选 `Add necessary library files as reference in the project` 和 `Generate peripheral initialization as a pair of'.c/.h'files per peripheral`
 7. 进入 keil 中 首先取消勾选 `Manage Run-Time Environment` 中的 CMSIS，原因是后面添加文件可能会导致编译失败。
@@ -47,18 +47,16 @@ graph BT
     B{bsp_system.h}
 
     %% 定义功能模块的内容
-    subgraph 功能模块
+    subgraph 底层驱动
         direction TB
-        A0(系统初始化模块) --system.h-->B 
         A1(LED 模块) --led_app.h----> B
         A2(按键模块) --key_app.h--> B
         A3(LCD 模块) --lcd_app.h----> B
-        A4(串口模块) --uart_app.h--> B
+        A4(串口模块) --usart_app.h--> B
         A5(ADC 模块) --adc_app.h----> B
         A6(IIC 模块) --i2c_app.h--> B
         A7(RTC 模块) --rtc_app.h----> B
-        A8(PWM 模块) --pwm_app.h--> B
-        A9(输入捕获模块) --tim_app.h----> B
+        A9(输入捕获+PWM模块) --tim_app.h----> B
 
         A31(lcd.h) --> A3
         A41(usart.h) --> A4
@@ -155,7 +153,7 @@ graph BT
 **黑屏：**
   1. PD2 引脚未使能
   2. 晶振未配置合理
-  3. MircoLIB 未勾选  
+  3. MicroLIB 未勾选  
 **卡死：**
   4. 调度器中的结构体的类型不是 `uint32_t`
       ![结构体定义](./Project.assets/10.png)
@@ -164,25 +162,25 @@ graph BT
 - **解决方法：**
   1. 检查 PD2 引脚是否使能
   2. 检查晶振时钟是否配置合理
-  3. 检查 MircoLIB 是否勾选
+  3. 检查 MicroLIB 是否勾选
   4. 检查调度器中的结构体的类型是否为 `uint32_t`
   5. 尽量少使用隐式转换，比如 `printf`、`sprintf` 这种函数的时候，类似于使用 `Lcd_Sprintf(Line5, "v:%2f", v_value)` 这个函数段，`v_value` 是一个整型，但是要显示的是浮点型，此时缓存区会出现溢出问题
 
 #### 4. 如何解决使用串口无法打印输出的问题？
 
 - **问题的原因：**
-  1. 可能是使用 CubeMX 配置引脚的时候没有正确配置，比如说例如将串口引脚误配置为 PC4/PC5 而非正确的 PA9/PA10（因为当时看的时候同样可以打开串口，所有就没有排错的时候就没有注意这个问题，最后将 UART 配置文件完全比对后才发现这个问题，费了很长时间排错，有点不值当）
+  1. 可能是使用 CubeMX 配置引脚的时候没有正确配置，比如说例如将串口引脚误配置为 PC4/PC5 而非正确的 PA9/PA10（因为当时看的时候同样可以打开串口，所以就没有排错的时候就没有注意这个问题，最后将 UART 配置文件完全比对后才发现这个问题，费了很长时间排错，有点不值当）
      ![引脚配置](./Project.assets/2.png)
   2. 串口能够打印，但是数据是乱码的
   3. 可能是没有中断使能函数初始化
-  4. 如果接受没有问题，出现程序卡死、打印混乱等问题，检查重定向的函数是否为 `int fputc` 以及是否开启  `MircoLIB`
+  4. 如果接受没有问题，出现程序卡死、打印混乱等问题，检查重定向的函数是否为 `int fputc` 以及是否开启  `MicroLIB`
 - **解决方法：**
-  1. 查看引脚时候配置正确
+  1. 查看引脚是否配置正确
      ![引脚配置解决方法](./Project.assets/3.png)
   2. 可能是对 `HAL_UART_Transmit` 这个 API 函数使用错误，比如说我就遇到了，应该传地址 **`(uint8_t *)&ch`**，结果写成 `(uint8_t *)ch` 导致串口能够打印，但是是乱码的（**这里真是细节问题**）
   3. 检查中断使能函数并放置在初始化，同时还有有一句放在外面使能了接收，后续接收才能自己循环开启接收
-  4. 检查是否打开了 DMA 的空闲接受并且 DMA 半满中断是否使能
-  5. 检查重定向的函数是否为 `int fputc` 以及是否开启  `MircoLIB`
+  4. 检查是否打开了 DMA 的空闲接收并且 DMA 半满中断是否使能
+  5. 检查重定向的函数是否为 `int fputc` 以及是否开启  `MicroLIB`
   6. 检查 CubeMX 的版本是否与 keil 的版本不匹配
 
 #### 5. ADC 无法采集到数据？
