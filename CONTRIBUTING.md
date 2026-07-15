@@ -79,7 +79,7 @@
 | **STM32G4xx DFP** | >= 1.4.0，固件包 `Keil.STM32G4xx_DFP.2.0.0.pack` |
 | **DAP-Link** | 用于烧录和调试 |
 
-详细的配置步骤和注意事项请参阅 [`Template/Project.md`](Template/Project.md#说明重要)。
+详细的配置步骤和注意事项请参阅 [`Reference/docs/Project.md`](Reference/docs/Project.md#说明重要)。
 
 ## 项目结构与命名规范
 
@@ -177,7 +177,7 @@ lq-embedded-solutions/
 提交 Issue 前，请先：
 
 1. 搜索 [已有 Issue](https://github.com/rsecss/lq-embedded-solutions/issues) 确认问题未被提出过
-2. 查阅 [`Template/Project.md` 故障排查指南](Template/Project.md#故障排查指南注意事项) 尝试自行解决
+2. 查阅 [`Reference/docs/Project.md` 故障排查指南](Reference/docs/Project.md#故障排查指南注意事项) 尝试自行解决
 
 ### Bug 报告
 

@@ -56,13 +56,13 @@ lq-embedded-solutions/
 │   └── 06-第十七届/
 │       └── 省赛/
 ├── Reference/                      # 参考资料
+│   ├── docs/                       # 工程模板文档（Project.md）
 │   └── individual/                 # 竞赛平台手册、原理图、芯片数据手册等(13份)
 ├── Template/                       # 项目工程模板
 │   ├── Core/                       # CubeMX 生成的核心层
 │   ├── Drivers/                    # HAL & CMSIS 驱动
 │   ├── MyApplication/              # 应用层（BSP 驱动 + 调度器）
-│   ├── MDK-ARM/                    # Keil 工程文件
-│   └── Project.md                  # 工程模板文档
+│   └── MDK-ARM/                    # Keil 工程文件
 └── Tools/                          # 工具软件（固件包、USB 驱动）
 ```
 
@@ -93,14 +93,14 @@ git clone https://github.com/rsecss/lq-embedded-solutions.git
 
 > [!IMPORTANT]
 >
-> 首次使用模板前，请务必阅读 [说明（非常重要）](Template/Project.md#说明重要) 中的环境配置要点（CubeMX 版本、时钟、MicroLIB、固件包等），可避免绝大多数搭建问题。遇到外设异常时也可查阅其中的 [故障排查指南](Template/Project.md#故障排查指南注意事项)。
+> 首次使用模板前，请务必阅读 [说明（非常重要）](Reference/docs/Project.md#说明重要) 中的环境配置要点（CubeMX 版本、时钟、MicroLIB、固件包等），可避免绝大多数搭建问题。遇到外设异常时也可查阅其中的 [故障排查指南](Reference/docs/Project.md#故障排查指南注意事项)。
 
 ## 常见问题
 
-- **LCD 黑屏/卡死?** → 查看 [故障排查指南 - LCD](Template/Project.md#3-lcd-屏幕黑屏和卡死问题)
-- **串口无输出?** → 查看 [故障排查指南 - 串口](Template/Project.md#4-如何解决使用串口无法打印输出的问题)
-- **ADC 采集异常?** → 查看 [故障排查指南 - ADC](Template/Project.md#5-adc-无法采集到数据)
-- **更多问题** → 查阅完整 [故障排查指南](Template/Project.md#故障排查指南注意事项)
+- **LCD 黑屏/卡死?** → 查看 [故障排查指南 - LCD](Reference/docs/Project.md#3-lcd-屏幕黑屏和卡死问题)
+- **串口无输出?** → 查看 [故障排查指南 - 串口](Reference/docs/Project.md#4-如何解决使用串口无法打印输出的问题)
+- **ADC 采集异常?** → 查看 [故障排查指南 - ADC](Reference/docs/Project.md#5-adc-无法采集到数据)
+- **更多问题** → 查阅完整 [故障排查指南](Reference/docs/Project.md#故障排查指南注意事项)
 
 ## 参与贡献
 
