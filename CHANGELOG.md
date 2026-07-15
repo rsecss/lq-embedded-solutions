@@ -4,6 +4,29 @@
 
 格式遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
+## [v2.1] - 2026-07-15
+
+### 新增
+- 收录第十六届省赛、国赛赛题及省赛参考代码
+- 收录第十七届省赛赛题
+- 收录第十六届模拟二赛题及参考代码
+
+### 变更
+- 将工程模板文档从 `Template/Project.md` 迁移至 `Reference/docs/`，并同步更新 README、CONTRIBUTING 索引
+- 扁平化仅含省赛的前三届目录，移除第十四届国赛赛题
+- 重新编号 `Reference/individual/` 文档
+- 使用 CubeMX 6.17 重新生成工程模板
+- 统一历届赛题文件命名规范
+- 移除英文版 README
+
+### 修复
+- 修复 LCD 驱动中文显示乱码问题
+- 修复 `pwm_set_frequency` 定时器编号分发错误
+- 修复调度器 tick 回绕问题并统一任务周期
+- 修复中值滤波比较函数的无符号回绕
+- 修复输入捕获上电阶段的浮点除零
+- 统一 `fonts.h` 与 `i2c_hal.c` 为 UTF-8 编码
+
 ## [v2.0] - 2026-02-26
 
 ### 新增
@@ -33,5 +56,6 @@
 
 ---
 
+[v2.1]: https://github.com/rsecss/lq-embedded-solutions/compare/v2.0...v2.1
 [v2.0]: https://github.com/rsecss/lq-embedded-solutions/compare/v1.0...v2.0
 [v1.0]: https://github.com/rsecss/lq-embedded-solutions/releases/tag/v1.0
